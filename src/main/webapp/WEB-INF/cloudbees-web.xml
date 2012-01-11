@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">
+    <appid>webinar/postgresql</appid>
+    <context-param>
+        <param-name>application.environment</param-name>
+        <param-value>prod</param-value>
+    </context-param>
+    <resource name="jdbc/postgresql" auth="Container" type="javax.sql.DataSource">
+        <param name="username" value="USERNAME" />
+        <param name="password" value="PASSWORD" />
+        <param name="url" value="jdbc:postgresql://HOSTNAME:LBPORT/DATABASENAME" />
+        <param name="driverClassName" value="org.postgresql.Driver"/>
+    </resource>
+</cloudbees-web-app>
