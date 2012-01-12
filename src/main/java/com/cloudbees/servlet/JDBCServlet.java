@@ -4,6 +4,7 @@
  */
 package com.cloudbees.servlet;
 
+import com.cloudbees.jdbc.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -44,23 +45,36 @@ public class JDBCServlet extends HttpServlet {
              * out.println("</html>");
              */
             prefixHTML(out);
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/postgresql");
-            Connection conn = ds.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rst = stmt.executeQuery("select * from countries");
-            while (rst.next()) {
-                int id = rst.getInt(1);
-                String foo = rst.getString(2);
-                String bar = rst.getString(3);
-                
-                out.println (foo + ", " + bar + "<br/>");
+            DAO dao = new DAO();
+            dao.connect();
+            ResultSet rst = dao.getAll();
+            if (rst != null) {
+                while (rst.next()) {
+                    int id = rst.getInt(1);
+                    String foo = rst.getString(2);
+                    String bar = rst.getString(3);
+
+                    out.println(foo + ", " + bar + "<br/>");
+                }
+            } else {
+                out.println("failed to get data from database <br/>");
             }
-            conn.close();
-        }catch (Exception e){
-            e.printStackTrace ();
-        } 
-        finally {
+
+            out.println("Getting capital of India <br/>");
+            rst = dao.getCapital("India");
+            if (rst !=null ) {
+                while (rst.next()) {
+                    String foo = rst.getString("CAPTIAL");
+                 
+                    out.println(foo + "<br/>");
+                }
+            } else {
+                out.println ("failed to get capital for India");
+            }
+            dao.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             postfixHTML(out);
             out.close();
         }

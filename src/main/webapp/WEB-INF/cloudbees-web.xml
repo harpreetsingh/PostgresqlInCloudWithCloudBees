@@ -6,9 +6,9 @@
         <param-value>prod</param-value>
     </context-param>
     <resource name="jdbc/postgresql" auth="Container" type="javax.sql.DataSource">
-        <param name="username" value="USERNAME" />
-        <param name="password" value="PASSWORD" />
-        <param name="url" value="jdbc:postgresql://DNSNAME:LBPORT/postgres" />
+        <param name="username" value="postgres" />
+        <param name="password" value="postgres" />
+        <param name="url" value="" />
         <param name="driverClassName" value="org.postgresql.Driver"/>
     </resource>
 </cloudbees-web-app>
