@@ -8,7 +8,7 @@
     <resource name="jdbc/postgresql" auth="Container" type="javax.sql.DataSource">
         <param name="username" value="USERNAME" />
         <param name="password" value="PASSWORD" />
-        <param name="url" value="jdbc:postgresql://HOSTNAME:LBPORT/DATABASENAME" />
+        <param name="url" value="jdbc:postgresql://DNSNAME:LBPORT/postgres" />
         <param name="driverClassName" value="org.postgresql.Driver"/>
     </resource>
 </cloudbees-web-app>

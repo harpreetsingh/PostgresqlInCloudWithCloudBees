@@ -81,7 +81,6 @@ public class PostgresqlServlet extends HttpServlet {
 
             out.println("DB Size :" + c.size() + "<br/>");
             Iterator iterator = c.iterator();
-            postfixHTML(out);
             while (iterator.hasNext()) {
                 Countries country = (Countries) iterator.next();
                 out.println("<b>" + country.getCaptial() + "</b> is the capital of " + country.getCountry() + "<br/>");
@@ -90,6 +89,7 @@ public class PostgresqlServlet extends HttpServlet {
             out.println(e.toString());
 
         } finally {
+            postfixHTML(out);
             out.close();
         }
     }
